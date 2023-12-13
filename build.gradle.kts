@@ -21,15 +21,12 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 	implementation("org.springframework.boot:spring-boot-starter-web")
-	implementation("org.flywaydb:flyway-core")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.iban4j:iban4j:3.2.7-RELEASE")
 	implementation("io.arrow-kt:arrow-core:1.1.2")
 	implementation("org.jetbrains.kotlinx:dataframe:0.12.0")
-	runtimeOnly("org.postgresql:postgresql")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
