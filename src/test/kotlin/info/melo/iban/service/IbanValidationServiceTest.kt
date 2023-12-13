@@ -9,7 +9,7 @@ class IbanValidationServiceTest {
 
     private lateinit var ibanValidationService: IbanValidationService
 
-    private val blzDataRepositoryFake = BlzDataRepository {
+    private val bankDataRepositoryFake = BankDataRepository {
         when (it) {
             "10000000" -> "Bundesbank"
             "10010010" -> "Postbank Ndl der Deutsche Bank"
@@ -25,7 +25,7 @@ class IbanValidationServiceTest {
 
     @BeforeEach
     fun setUp() {
-        ibanValidationService = IbanValidationService(blzDataRepositoryFake)
+        ibanValidationService = IbanValidationService(bankDataRepositoryFake)
     }
 
     @Test

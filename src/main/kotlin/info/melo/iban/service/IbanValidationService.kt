@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service
 
 @Service
 class IbanValidationService(
-    private val blzDataRepository: BlzDataRepository,
+    private val bankDataRepository: BankDataRepository,
 ) {
     operator fun invoke(ibanInput: String): Either<IbanValidationError, IbanValidationSuccess> =
         either.eager {
@@ -18,7 +18,7 @@ class IbanValidationService(
                     is IbanValueObject.CreateIbanErrors.UnsupportedCountry -> IbanValidationError.UnsupportedCountry
                 }
             }.bind()
-            val bankName = blzDataRepository.findBankNameByBlz(iban.getBankCode())
+            val bankName = bankDataRepository.findBankNameByBankCode(iban.getBankCode())
             IbanValidationSuccess(iban.getFormattedValue(), bankName)
         }
 
