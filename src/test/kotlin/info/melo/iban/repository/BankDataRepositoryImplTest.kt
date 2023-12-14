@@ -1,10 +1,15 @@
 package info.melo.iban.repository
 
+import info.melo.iban.service.BankDataRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
 
+@SpringBootTest(classes = [BankDataRepositoryImpl::class])
 class BankDataRepositoryImplTest {
-    private val testSubject: BankDataRepositoryImpl = BankDataRepositoryImpl()
+    @Autowired
+    private lateinit var testSubject: BankDataRepository
 
     @Test
     fun `given known BLZ return bank's name`() {
