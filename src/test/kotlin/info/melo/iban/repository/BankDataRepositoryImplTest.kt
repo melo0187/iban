@@ -1,5 +1,6 @@
 package info.melo.iban.repository
 
+import info.melo.iban.model.BankName
 import info.melo.iban.service.BankDataRepository
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
@@ -14,7 +15,7 @@ class BankDataRepositoryImplTest {
     @Test
     fun `given known BLZ return bank's name`() {
         val bankName = testSubject.findBankNameByBankCode("61150020")
-        assertThat(bankName).isEqualTo("Kreissparkasse Esslingen-Nürtingen")
+        assertThat(bankName).isEqualTo(BankName("Kreissparkasse Esslingen-Nürtingen"))
     }
 
     @Test

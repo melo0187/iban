@@ -1,5 +1,6 @@
 package info.melo.iban.repository
 
+import info.melo.iban.model.BankName
 import info.melo.iban.service.BankDataRepository
 import org.jetbrains.kotlinx.dataframe.DataFrame
 import org.jetbrains.kotlinx.dataframe.api.column
@@ -17,10 +18,11 @@ class BankDataRepositoryImpl(
     private val Bankleitzahl by column<Int>()
     private val Bezeichnung by column<String>()
 
-    override fun findBankNameByBankCode(blzString: String): String? =
+    override fun findBankNameByBankCode(blzString: String): BankName? =
         blzString.toIntOrNull()
             ?.let { blz ->
                 df.firstOrNull { Bankleitzahl() == blz }?.get(Bezeichnung)
             }
+            ?.let(::BankName)
 
 }

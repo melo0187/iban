@@ -2,6 +2,7 @@ package info.melo.iban.service
 
 import arrow.core.Either
 import arrow.core.continuations.either
+import info.melo.iban.model.BankName
 import info.melo.iban.model.IbanValueObject
 import org.springframework.stereotype.Service
 
@@ -22,7 +23,7 @@ class IbanValidationService(
             IbanValidationSuccess(iban.getFormattedValue(), bankName)
         }
 
-    data class IbanValidationSuccess(val validIban: String, val bankName: String? = null)
+    data class IbanValidationSuccess(val validIban: String, val bankName: BankName? = null)
     sealed interface IbanValidationError {
         data object InvalidCheckDigit : IbanValidationError
         data object InvalidFormat : IbanValidationError

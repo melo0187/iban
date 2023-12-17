@@ -1,6 +1,7 @@
 package info.melo.iban.service
 
 import arrow.core.left
+import info.melo.iban.model.BankName
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -11,14 +12,14 @@ class IbanValidationServiceTest {
 
     private val bankDataRepositoryFake = BankDataRepository {
         when (it) {
-            "10000000" -> "Bundesbank"
-            "10010010" -> "Postbank Ndl der Deutsche Bank"
-            "10010123" -> "OLINDA Zweigniederlassung Deutschland"
-            "10010200" -> "Treezor, Berlin"
-            "10010300" -> "Klarna Bank German Branch"
-            "10010424" -> "Aareal Bank"
-            "10010500" -> "Noelse Pay"
-            "10011001" -> "N26 Bank"
+            "10000000" -> BankName("Bundesbank")
+            "10010010" -> BankName("Postbank Ndl der Deutsche Bank")
+            "10010123" -> BankName("OLINDA Zweigniederlassung Deutschland")
+            "10010200" -> BankName("Treezor, Berlin")
+            "10010300" -> BankName("Klarna Bank German Branch")
+            "10010424" -> BankName("Aareal Bank")
+            "10010500" -> BankName("Noelse Pay")
+            "10011001" -> BankName("N26 Bank")
             else -> null
         }
     }
@@ -36,7 +37,7 @@ class IbanValidationServiceTest {
 
         assertTrue(result.isRight())
         assertEquals("DE91 1000 0000 0123 4567 89", result.orNull()!!.validIban)
-        assertEquals("Bundesbank", result.orNull()!!.bankName)
+        assertEquals(BankName("Bundesbank"), result.orNull()!!.bankName)
     }
 
     @Test

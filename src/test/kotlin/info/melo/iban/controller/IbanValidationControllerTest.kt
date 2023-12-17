@@ -2,6 +2,7 @@ package info.melo.iban.controller
 
 import arrow.core.left
 import arrow.core.right
+import info.melo.iban.model.BankName
 import info.melo.iban.service.IbanValidationService
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.`when`
@@ -26,7 +27,7 @@ class IbanValidationControllerTest {
         `when`(ibanValidationService(ibanInput)).thenReturn(
             IbanValidationService.IbanValidationSuccess(
                 "DE92 6115 0020 0000 1251 61",
-                "Kreissparkasse Esslingen-Nürtingen"
+                BankName("Kreissparkasse Esslingen-Nürtingen")
             ).right()
         )
 

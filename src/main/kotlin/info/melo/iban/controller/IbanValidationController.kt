@@ -24,7 +24,7 @@ class IbanValidationController(
                 IbanValidationResponse.IbanValidationFailure(ibanValidationRequest.ibanToValidate, errorMessage)
             },
             ifRight = {
-                IbanValidationResponse.IbanValidationSuccess(it.validIban, it.bankName)
+                IbanValidationResponse.IbanValidationSuccess(it.validIban, it.bankName?.value)
             }
         ).let { response ->
             ResponseEntity(response, response.status)
