@@ -17,9 +17,14 @@ const matchI = makeMatchI("status");
 function IbanValidator() {
 
     const [response, setResponse] = useState<O.Option<ApiResponseData>>(O.none)
+    const [pending, setPending] = useState(false)
+
     const handleSubmit = (e: any) => {
         // Prevent the browser from reloading the page
         e.preventDefault();
+
+        // reset response
+        setResponse(O.none)
 
         // Read the form data
         const form = e.target;
@@ -29,6 +34,7 @@ function IbanValidator() {
         const formDataJsonString = JSON.stringify(formDataObject);
 
         // Pass formDataJsonString as a fetch body directly:
+        setPending(true)
         fetch('/api/validateIban', {
             method: form.method,
             body: formDataJsonString,
@@ -45,12 +51,14 @@ function IbanValidator() {
             }
         ).catch(
             error => console.error(error)
+        ).finally(
+            () => setPending(false)
         );
     };
 
     return (<form method="post" onSubmit={handleSubmit}>
         <label>IBAN to validate<input name="ibanToValidate" type="text" placeholder="IBAN"/></label>
-        <button type="submit">Validate</button>
+        <button type="submit" disabled={pending}>{pending ? "Validating" : "Validate"}</button>
         <IbanValidationResult response={response}/>
     </form>)
 }
